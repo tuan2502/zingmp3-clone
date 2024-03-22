@@ -2,8 +2,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Home, Login, Public } from './containers/public';
 import { Routes, Route } from 'react-router-dom';
 import path from './utils/path';
+import { useEffect } from 'react';
+import * as actions from './store/actions';
+
 
 const App = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actions.getHome());
+  }, [])
+  
 
   return (
     <>
