@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { Home, Login, Public } from './containers/public';
+import { useDispatch } from 'react-redux';
+import { Home, Login, Public, Personal } from './containers/public';
 import { Routes, Route } from 'react-router-dom';
 import path from './utils/path';
 import { useEffect } from 'react';
@@ -21,6 +21,7 @@ const App = () => {
           <Route path={path.PUBLIC} element={<Public />}>
             <Route path={path.HOME} element={<Home />} />
             <Route path={path.LOGIN} element={<Login />} />
+            <Route path={path.MY_MUSIC} element={<Personal />} />
 
             <Route path={path.STAR} element={<Home />} />
           </Route>
