@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { getArrSlider } from 'src/utils/fn'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getArrSlider } from 'src/utils/fn';
+import * as actions from '../store/actions';
 
 const Slider = () => {
-    const { banner } = useSelector(state => state.app)
-    console.log(banner)
+    const { banner } = useSelector(state => state.app);
+    const dispatch = useDispatch();
+    
     useEffect(() => {
         // Tạo slider
         const sliderEls = document.getElementsByClassName('slider-item')
@@ -15,9 +17,9 @@ const Slider = () => {
                         
             for (let i = 0; i < sliderEls.length; i++) {
                 // Xoa classnames(css)
-                sliderEls[i].classList.remove('anime-slide-right', 'order-last', 'z-20');
-                sliderEls[i].classList.remove('anime-slide-left', 'order-first', 'z-10');
-                sliderEls[i].classList.remove('anime-slide-left-2', 'order-2', 'z-10');
+                sliderEls[i].classList?.remove('anime-slide-right', 'order-last', 'z-20');
+                sliderEls[i].classList?.remove('anime-slide-left', 'order-first', 'z-10');
+                sliderEls[i].classList?.remove('anime-slide-left-2', 'order-2', 'z-10');
 
                 if (list.some(item => item === i)) {
                     sliderEls[i].style.cssText = 'display: block';
@@ -28,11 +30,11 @@ const Slider = () => {
             // Them animation
             list.forEach(item => {
                 if (item === max) {
-                    sliderEls[item].classList.add('animate-slide-right', 'order-last', 'z-20');
+                    sliderEls[item].classList?.add('animate-slide-right', 'order-last', 'z-20');
                 } else if(item === min) {
-                    sliderEls[item].classList.add('animate-slide-left', 'order-first', 'z-10');
+                    sliderEls[item].classList?.add('animate-slide-left', 'order-first', 'z-10');
                 } else{
-                    sliderEls[item].classList.add('animate-slide-left-2', 'order-2', 'z-10');
+                    sliderEls[item].classList?.add('animate-slide-left-2', 'order-2', 'z-10');
                 }
             });
 
@@ -45,10 +47,16 @@ const Slider = () => {
 
     }, [])
 
+    const handleClickBanner = (item) => {
+        if(item?.type === 4){
+            dispatch(actions.setCurSongId(item.encodeId));
+        }
+    }
+
     return (
         <div className='flex gap-8 w-full overflow-hidden px-[59px] pt-8'>
             {banner?.map((item, index) => (
-                <img src={item.banner} key={item.encodeId} alt='banner' className={`slider-item flex-1 object-cover w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`} />
+                <img src={item.banner} key={item.encodeId} alt='banner' onClick={()=>handleClickBanner(item)} className={`slider-item flex-1 object-cover w-[30%] rounded-lg ${index <= 2 ? 'block' : 'hidden'}`} />
             ))}
         </div>
     )

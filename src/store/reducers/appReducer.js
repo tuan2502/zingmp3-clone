@@ -49,7 +49,6 @@ const initState = {
 }
 
 
-console.log(initState.banner);
 const appReducer = (state = initState, action) => {
     
     switch (action.type) {
