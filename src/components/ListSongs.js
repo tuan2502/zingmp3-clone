@@ -2,15 +2,20 @@ import React, { memo } from 'react'
 import ListSong from './ListSong';
 import icons from 'src/utils/icons';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+
 
 const { BiSort, BsDot } = icons;
 
-const ListSongs = ({ songs, totalDuration }) => {
+const ListSongs = ({ totalDuration }) => {
+
+  const { songs } = useSelector(state => state.music)
+
   return (
     <div className='w-full flex flex-col text-xs text-gray-600'>
       <div className='flex justify-between items-center p-[10px] font-semibold border-b border-b-gray-400/[0.5]'>
         <div className='flex items-center gap-3 basis-1/2'>
-          <span><BiSort size={16}/></span>
+          <span><BiSort size={16} /></span>
           <span>BÀI HÁT</span>
 
         </div>
